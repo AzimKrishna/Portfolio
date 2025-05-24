@@ -208,7 +208,7 @@ const ContactSection = () => {
               <form
                 onSubmit={(e) => {
                   handleSubmit(e)
-                    .then((result) => {
+                    .then((result: any) => {
                       if (result?.response?.status === 200) {
                         // Added optional chaining
                         handleSuccess();
