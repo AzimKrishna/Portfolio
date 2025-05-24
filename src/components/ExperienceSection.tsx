@@ -69,9 +69,9 @@ const ExperienceSection = () => {
       });
 
       gsap.utils.toArray(".experience-card").forEach((card, i) => {
-        gsap.from(card, {
+        gsap.from(card as Element, {
           scrollTrigger: {
-            trigger: card,
+            trigger: card as Element,
             start: "top 90%",
           },
           opacity: 0,

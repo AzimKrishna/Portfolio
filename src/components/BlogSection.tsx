@@ -1,33 +1,45 @@
-
-import React from 'react';
-import { Calendar, ArrowUp } from 'lucide-react';
+import React from "react";
+import Image from "next/image"; // Import next/image
+import { Calendar, ArrowUp } from "lucide-react";
 
 const BlogSection = () => {
   const blogPosts = [
     {
-      title: 'Building Scalable React Applications',
-      excerpt: 'Learn best practices for architecting large-scale React applications with proper state management and component organization.',
-      date: '2024-01-15',
-      readTime: '8 min read',
-      tags: ['React', 'Architecture', 'Best Practices'],
-      image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=400&fit=crop'
+      title: "Building Scalable React Applications",
+      excerpt:
+        "Learn best practices for architecting large-scale React applications with proper state management and component organization.",
+      date: "2024-01-15",
+      readTime: "8 min read",
+      tags: ["React", "Architecture", "Best Practices"],
+      image:
+        "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=400&fit=crop",
+      width: 800, // Added width
+      height: 400, // Added height
     },
     {
-      title: 'Modern CSS Techniques for Better UX',
-      excerpt: 'Exploring advanced CSS features like Grid, Flexbox, and custom properties to create stunning user interfaces.',
-      date: '2024-01-08',
-      readTime: '6 min read',
-      tags: ['CSS', 'UI/UX', 'Frontend'],
-      image: 'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=800&h=400&fit=crop'
+      title: "Modern CSS Techniques for Better UX",
+      excerpt:
+        "Exploring advanced CSS features like Grid, Flexbox, and custom properties to create stunning user interfaces.",
+      date: "2024-01-08",
+      readTime: "6 min read",
+      tags: ["CSS", "UI/UX", "Frontend"],
+      image:
+        "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=800&h=400&fit=crop",
+      width: 800, // Added width
+      height: 400, // Added height
     },
     {
-      title: 'Node.js Performance Optimization',
-      excerpt: 'Tips and techniques for optimizing Node.js applications for better performance and scalability.',
-      date: '2024-01-01',
-      readTime: '10 min read',
-      tags: ['Node.js', 'Performance', 'Backend'],
-      image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=400&fit=crop'
-    }
+      title: "Node.js Performance Optimization",
+      excerpt:
+        "Tips and techniques for optimizing Node.js applications for better performance and scalability.",
+      date: "2024-01-01",
+      readTime: "10 min read",
+      tags: ["Node.js", "Performance", "Backend"],
+      image:
+        "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=400&fit=crop",
+      width: 800, // Added width
+      height: 400, // Added height
+    },
   ];
 
   return (
@@ -46,42 +58,57 @@ const BlogSection = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.map((post, index) => (
-            <article key={index} className="group bg-slate-900/50 rounded-xl overflow-hidden border border-slate-700 hover:border-blue-500/50 transition-all duration-300 hover:transform hover:scale-105">
+            <article
+              key={index}
+              className="group bg-slate-900/50 rounded-xl overflow-hidden border border-slate-700 hover:border-blue-500/50 transition-all duration-300 hover:transform hover:scale-105"
+            >
               <div className="relative overflow-hidden">
-                <img 
-                  src={post.image} 
+                <Image
+                  src={post.image}
                   alt={post.title}
                   className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+                  width={post.width} // Use defined width
+                  height={post.height} // Use defined height
+                  style={{ objectFit: "cover", height: "12rem" }} // Keep h-48 behavior
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
               </div>
-              
+
               <div className="p-6">
                 <div className="flex items-center space-x-4 text-gray-400 text-sm mb-3">
                   <div className="flex items-center space-x-1">
                     <Calendar size={14} />
-                    <span>{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                    <span>
+                      {new Date(post.date).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
+                    </span>
                   </div>
                   <span>•</span>
                   <span>{post.readTime}</span>
                 </div>
-                
+
                 <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors duration-200 line-clamp-2">
                   {post.title}
                 </h3>
-                
+
                 <p className="text-gray-300 text-sm mb-4 leading-relaxed line-clamp-3">
                   {post.excerpt}
                 </p>
-                
+
                 <div className="flex flex-wrap gap-2 mb-4">
                   {post.tags.map((tag) => (
-                    <span key={tag} className="px-2 py-1 bg-purple-500/20 text-purple-300 rounded text-xs border border-purple-500/30">
+                    <span
+                      key={tag}
+                      className="px-2 py-1 bg-purple-500/20 text-purple-300 rounded text-xs border border-purple-500/30"
+                    >
                       {tag}
                     </span>
                   ))}
                 </div>
-                
+
                 <button className="flex items-center space-x-2 text-blue-400 hover:text-blue-300 transition-colors duration-200 font-medium">
                   <span>Read More</span>
                   <ArrowUp className="transform rotate-45" size={16} />

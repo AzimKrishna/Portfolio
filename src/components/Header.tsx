@@ -1,7 +1,6 @@
-
-import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-import ThemeToggle from './ThemeToggle';
+import React, { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
+// import ThemeToggle from './ThemeToggle'; // Removed unused import
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -11,24 +10,28 @@ const Header = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Blog', href: '#blog' },
-    { name: 'Contact', href: '#contact' },
+    { name: "Home", href: "#home" },
+    { name: "About", href: "#about" },
+    { name: "Skills", href: "#skills" },
+    { name: "Experience", href: "#experience" },
+    { name: "Projects", href: "#projects" },
+    { name: "Blog", href: "#blog" },
+    { name: "Contact", href: "#contact" },
   ];
 
   return (
-    <header className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-      isScrolled ? 'bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
-    }`}>
+    <header
+      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+        isScrolled
+          ? "bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm shadow-lg"
+          : "bg-transparent"
+      }`}
+    >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
@@ -36,7 +39,7 @@ const Header = () => {
               ABK
             </h1>
           </div>
-          
+
           <nav className="hidden md:flex items-center space-x-6">
             <div className="flex items-baseline space-x-8">
               {navItems.map((item, index) => (
@@ -59,8 +62,16 @@ const Header = () => {
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:scale-110 transition-all duration-300"
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"} // Added aria-label
             >
-              {isMenuOpen ? <X size={24} className="rotate-180 transition-transform duration-300" /> : <Menu size={24} />}
+              {isMenuOpen ? (
+                <X
+                  size={24}
+                  className="rotate-180 transition-transform duration-300"
+                />
+              ) : (
+                <Menu size={24} />
+              )}
             </button>
           </div>
         </div>

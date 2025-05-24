@@ -1,8 +1,7 @@
-
-import React, { useState } from 'react';
+import React from "react"; // Removed useState
 import {
   Mail,
-  Phone,
+  // Phone, // Removed unused Phone
   MapPin,
   Send,
   Linkedin,
@@ -10,7 +9,7 @@ import {
   Twitter,
 } from "lucide-react";
 import { useForm, ValidationError } from "@formspree/react";
-import { Toaster, toast } from "react-hot-toast";
+import { toast } from "react-hot-toast"; // Removed Toaster
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -18,7 +17,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const ContactSection = () => {
-
   const [state, handleSubmit] = useForm("xwpodpqq");
 
   const sectionRef = useRef(null);
@@ -39,9 +37,9 @@ const ContactSection = () => {
 
       // Animate EACH contact card individually
       gsap.utils.toArray(".contact-card").forEach((card, i) => {
-        gsap.from(card, {
+        gsap.from(card as Element, {
           scrollTrigger: {
-            trigger: card,
+            trigger: card as Element,
             start: "top 90%",
           },
           opacity: 0,
@@ -54,9 +52,9 @@ const ContactSection = () => {
 
       // Animate EACH social icon individually
       gsap.utils.toArray(".social-icon").forEach((icon, i) => {
-        gsap.from(icon, {
+        gsap.from(icon as Element, {
           scrollTrigger: {
-            trigger: icon,
+            trigger: icon as Element,
             start: "top 95%",
           },
           opacity: 0,
@@ -89,16 +87,16 @@ const ContactSection = () => {
   const contactInfo = [
     {
       icon: Mail,
-      label: 'Email',
-      value: 'azimbaji19@gmail.com',
-      link: 'mailto:azimbaji19@gmail.com'
+      label: "Email",
+      value: "azimbaji19@gmail.com",
+      link: "mailto:azimbaji19@gmail.com",
     },
     {
       icon: MapPin,
-      label: 'Location',
-      value: 'Thane, Maharashtra, IN',
-      link: '#'
-    }
+      label: "Location",
+      value: "Thane, Maharashtra, IN",
+      link: "#",
+    },
   ];
 
   const socialLinks = [
@@ -115,7 +113,7 @@ const ContactSection = () => {
     {
       icon: Twitter,
       label: "Twitter",
-      link: "https://x.com/crypto_hades_", // Replace with your actual Twitter handle
+      link: "https://x.com/crypto_hades_",
     },
   ];
 
@@ -133,20 +131,20 @@ const ContactSection = () => {
             </span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto font-mono">
-            Let's discuss your next project or collaboration opportunity
+            Let&apos;s discuss your next project or collaboration opportunity
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
           <div>
             <h3 className="text-2xl font-bold text-white mb-8 font-mono">
-              Let's work together
+              Let&apos;s work together
             </h3>
             <p className="text-gray-300 mb-8 leading-relaxed">
-              I'm passionate about building innovative software solutions,
+              I&apos;m passionate about building innovative software solutions,
               blockchain applications, and automation systems. Whether you need
               a full-stack developer for your team or want to discuss a project,
-              I'd love to hear from you.
+              I&apos;d love to hear from you.
             </p>
 
             <div className="space-y-6 mb-8">
@@ -176,6 +174,8 @@ const ContactSection = () => {
                 <a
                   key={index}
                   href={social.link}
+                  target="_blank" // Added for external links
+                  rel="noopener noreferrer" // Added for security
                   className="social-icon w-12 h-12 bg-slate-800/50 border border-slate-700 rounded-lg flex items-center justify-center hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300 group"
                 >
                   <social.icon
@@ -209,7 +209,8 @@ const ContactSection = () => {
                 onSubmit={(e) => {
                   handleSubmit(e)
                     .then((result) => {
-                      if (result.response.status === 200) {
+                      if (result?.response?.status === 200) {
+                        // Added optional chaining
                         handleSuccess();
                       } else {
                         handleError();

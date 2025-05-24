@@ -22,9 +22,9 @@ const EducationSection = () => {
       });
 
       gsap.utils.toArray(".edu-block").forEach((block, i) => {
-        gsap.from(block, {
+        gsap.from(block as Element, {
           scrollTrigger: {
-            trigger: block,
+            trigger: block as Element,
             start: "top 90%",
           },
           opacity: 0,
@@ -36,9 +36,9 @@ const EducationSection = () => {
       });
 
       gsap.utils.toArray(".leadership-card").forEach((card, i) => {
-        gsap.from(card, {
+        gsap.from(card as Element, {
           scrollTrigger: {
-            trigger: card,
+            trigger: card as Element,
             start: "top 90%",
           },
           opacity: 0,

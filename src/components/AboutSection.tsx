@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import Image from "next/image"; // Import next/image
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Shield, Code, Globe } from "lucide-react";
@@ -135,10 +136,12 @@ const AboutSection = () => {
           <div className="about-photo relative">
             <div className="w-full h-96 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center">
               <div className="w-72 h-72 rounded-full overflow-hidden border-4 border-white/20 shadow-lg">
-                <img
-                  src="https://i.ibb.co/qLQtvj0T/pfp.jpg"
+                <Image
+                  src="https://i.ibb.co/qLQtvj0T/pfp.jpg" // Typo in original was qLQtvj0T
                   alt="Azim Baji Krishna"
                   className="w-full h-full object-cover"
+                  width={288} // w-72 is 288px
+                  height={288} // h-72 is 288px
                 />
               </div>
             </div>

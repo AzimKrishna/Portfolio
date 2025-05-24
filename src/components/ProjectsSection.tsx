@@ -1,4 +1,6 @@
+"use client";
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import {
   ExternalLink,
   Code,
@@ -18,25 +20,34 @@ const ProjectsSection = () => {
   const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
-    const cards = gsap.utils.toArray(".project-card");
-
-    gsap.fromTo(
-      cards,
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: "power2.out",
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: ".project-card",
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
+    gsap.utils.toArray(".project-card").forEach((card: any) => {
+      if (!card.dataset.animated) {
+        gsap.fromTo(
+          card,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+            },
+            onComplete: () => {
+              card.dataset.animated = "true";
+            },
+          }
+        );
       }
-    );
+    });
   }, []);
+
+  const handleViewAll = () => {
+    setShowAll(true);
+    setTimeout(() => ScrollTrigger.refresh(), 100); // ensure DOM is updated
+  };
 
   const projects = [
     {
@@ -44,6 +55,8 @@ const ProjectsSection = () => {
       description:
         "Currently developing a comprehensive WhatsApp CRM SaaS leveraging the WhatsApp Cloud API with drag-and-drop bot builders, multi-agent support, and advanced automation tools. Built with microservice architecture for high scalability.",
       image: "https://i.ibb.co/3YG4j9TG/tickit.jpg",
+      width: 800,
+      height: 450, // Example dimensions
       tech: [
         "Vue.js",
         "Laravel",
@@ -62,7 +75,9 @@ const ProjectsSection = () => {
       description:
         "Building a modern third-party checkout solution inspired by Shopflo, GoKwik, and Razorpay Magic Checkout. Designed for Shopify and custom D2C stores with a focus on speed, intelligent autofill, RTO risk reduction, and conversion-optimized design.",
       image:
-        "https://gempages.net/cdn/shop/articles/Shopify_checkout_customization_2560x.webp?v=1706251598", // Replace with your image
+        "https://gempages.net/cdn/shop/articles/Shopify_checkout_customization_2560x.webp?v=1706251598",
+      width: 1200,
+      height: 675, // Example dimensions
       tech: ["MongoDB", "Express.js", "React.js", "Node.js", "Redis", "JWT"],
       github: "https://github.com/AzimKrishna/Shopify-Checkout",
       live: null,
@@ -74,6 +89,8 @@ const ProjectsSection = () => {
       description:
         "Developed and shipped a custom whatsapp CRM solutiom for SkyJumper Trampoline Park leveraging Whatsapp Cloud API, with multi-agent support, inbox, branch management, and chatbot integrated with booking system which produced 10Lakh INR in sales on autopilot within 7 months.",
       image: "https://i.ibb.co/FbNtf9Hr/Screenshot-1.png",
+      width: 1000,
+      height: 500, // Example dimensions
       tech: [
         "Vue.js",
         "Laravel",
@@ -92,6 +109,8 @@ const ProjectsSection = () => {
       description:
         "An AIO dashboard application integrating Shopify, WooCommerce, Google Ads, and Meta Ads platforms. Enables CEOs to analyze marketing budgets and sales insights with AI-driven strategies. Cheif Marketing Officer at their fingertips!",
       image: "https://i.ibb.co/Gv9PjyXS/myCMO.jpg",
+      width: 1000,
+      height: 500, // Example dimensions
       tech: ["Laravel", "jQuery", "MySQL", "API Integration"],
       github: null,
       live: null,
@@ -103,6 +122,8 @@ const ProjectsSection = () => {
       description:
         "Blockchain-based identity authentication platform to combat identity theft. Published in Sirjana Publications and secured copyright from Government of India.",
       image: "https://i.ibb.co/TBSFFFKq/authentix.jpg",
+      width: 1000,
+      height: 500, // Example dimensions
       tech: ["Blockchain", "Node.js", "PHP", "Solidity", "Ethereum"],
       github: null,
       live: null,
@@ -118,7 +139,9 @@ const ProjectsSection = () => {
       description:
         "The Tuition Management System optimizes online tutoring with automated session scheduling, billing, and report card generation. It simplifies tasks for tutors, offering a user-friendly dashboard and efficient modules for student management, billing, and scheduling.",
       image:
-        "https://github.com/AzimKrishna/Tuition-Management-System/blob/master/screenshots/Screenshot_3.png?raw=true",
+        "https://raw.githubusercontent.com/AzimKrishna/Tuition-Management-System/master/screenshots/Screenshot_3.png?raw=true",
+      width: 1000,
+      height: 500, // Example dimensions
       tech: ["PHP", "MySQL", "JavaScript", "PDF Generation"],
       github: "https://github.com/AzimKrishna/Tuition-Management-System",
       live: null,
@@ -130,6 +153,8 @@ const ProjectsSection = () => {
       description:
         "Landing page built using the VILT stack for Celesta Campus. This landing page is used for collecting leads and enquries.",
       image: "https://i.ibb.co/9kg0h0r9/cc.png",
+      width: 1000,
+      height: 500,
       tech: ["Vue.js", "Inertia.js", "Laravel", "Tailwind CSS"],
       github: null,
       live: "https://celestacampus.com/",
@@ -141,6 +166,8 @@ const ProjectsSection = () => {
       description:
         "Dynamic industrial website built for MR SERENITY, UAE to showcase services and project inquiries. Design inspiration from ThemeForest theme.",
       image: "https://i.ibb.co/9mgxsFFL/indus.png",
+      width: 1000,
+      height: 500,
       tech: ["HTML", "CSS", "JavaScript"],
       github: null,
       live: "https://abkrishna.me/Industrial-website/",
@@ -152,7 +179,9 @@ const ProjectsSection = () => {
       description:
         "A public reporting system for missing persons featuring real-time news sync, email automation, and admin verification workflows. Designed to assist families and law enforcement in faster tracking and communication.",
       image:
-        "https://github.com/AzimKrishna/PublicLens/blob/master/screenshots/Screenshot_8.png?raw=true",
+        "https://raw.githubusercontent.com/AzimKrishna/PublicLens/master/screenshots/Screenshot_8.png?raw=true",
+      width: 1000,
+      height: 500,
       tech: ["PHP", "MySQL", "JavaScript", "Email Integration"],
       github: "https://github.com/AzimKrishna/PublicLens",
       live: null,
@@ -165,6 +194,8 @@ const ProjectsSection = () => {
         "A robust online examination platform with real-time exam timer, student dashboards, auto-evaluation, and result generation modules. Built for academic institutions to conduct assessments remotely and efficiently.",
       image:
         "https://raw.githubusercontent.com/AzimKrishna/Online-assessment-system/master/screenshots/Screenshot_6.png",
+      width: 1000,
+      height: 500,
       tech: ["PHP", "MySQL", "JavaScript", "Timer System"],
       github: "https://github.com/AzimKrishna/Online-assessment-system",
       live: null,
@@ -177,6 +208,8 @@ const ProjectsSection = () => {
         "An intuitive task manager inspired from Microsoft To Do with clean UI/UX and persistent task state management. Built to help users track daily, weekly, and monthly goals with seamless CRUD operations..",
       image:
         "https://raw.githubusercontent.com/AzimKrishna/To-Do-List/main/screenshots/Screenshot_3.png",
+      width: 1000,
+      height: 500,
       tech: ["HTML", "CSS", "JavaScript"],
       github: "https://github.com/AzimKrishna/To-Do-List",
       live: "https://abkrishna.me/To-Do-List/",
@@ -188,6 +221,8 @@ const ProjectsSection = () => {
       description:
         "A responsive clone website of SkyJumper Trampoline Park. Developed as a part of assignment few years back.",
       image: "https://i.ibb.co/svpTW7Pw/sjclone.png",
+      width: 1000,
+      height: 500,
       tech: ["HTML", "CSS", "JavaScript", "jQuery"],
       github: "https://github.com/AzimKrishna/SkyJumper-Clone",
       live: "https://abkrishna.me/SkyJumper-Clone/",
@@ -200,6 +235,8 @@ const ProjectsSection = () => {
         "A secure user authentication system with OTP verification built using PHP, MySQL, and AJAX. Designed for applications requiring otp-based registration to prevent spam.",
       image:
         "https://raw.githubusercontent.com/AzimKrishna/Login-Registration-OTP-Page/main/screenshots/Screenshot_1.png",
+      width: 1000,
+      height: 500,
       tech: ["PHP", "JavaScript", "Tailwind CSS", "MySQL"],
       github: "https://github.com/AzimKrishna/Login-Registration-OTP-Page",
       live: null,
@@ -212,6 +249,8 @@ const ProjectsSection = () => {
         "Web app providing stopwatch and countdown timer functionalities.",
       image:
         "https://raw.githubusercontent.com/AzimKrishna/Timer-and-Stopwatch/main/screenshots/Screenshot_2.png",
+      width: 1000,
+      height: 500,
       tech: ["HTML", "CSS", "JavaScript"],
       github: "https://github.com/AzimKrishna/Timer-and-Stopwatch",
       live: "https://abkrishna.me/Timer-and-Stopwatch/",
@@ -223,6 +262,8 @@ const ProjectsSection = () => {
       description:
         "Crafted a responsive website for Techsphere as a part of assignment few years back.",
       image: "https://i.ibb.co/fgrdM94/tc.png",
+      width: 1000,
+      height: 500,
       tech: ["HTML", "CSS", "JavaScript"],
       github: "https://github.com/AzimKrishna/Techsphere-design",
       live: "https://abkrishna.me/Techsphere-design/",
@@ -231,13 +272,18 @@ const ProjectsSection = () => {
     },
   ];
 
-  const getRepoName = (url) => {
+  const getRepoName = (url: string | null) => {
+    // Added type for url
     if (!url) return null;
     const parts = url.split("/");
-    return `${parts[3]}/${parts[4]}`;
+    if (parts.length >= 5) {
+      // Basic check for typical GitHub URL structure
+      return `${parts[3]}/${parts[4]}`;
+    }
+    return null;
   };
 
-  const getStatusColor = (status) => {
+  const getStatusColor = (status: string) => {
     switch (status) {
       case "In Development":
         return "bg-yellow-500/20 text-yellow-300 border-yellow-500/30";
@@ -275,10 +321,13 @@ const ProjectsSection = () => {
               className="project-card group bg-slate-800/50 rounded-xl overflow-hidden border border-slate-700 hover:border-blue-500/50 transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:shadow-2xl"
             >
               <div className="relative overflow-hidden">
-                <img
+                <Image
                   src={project.image}
                   alt={project.title}
                   className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700"
+                  width={project.width || 800} // Provide default or ensure all projects have dimensions
+                  height={project.height || 450}
+                  style={{ objectFit: "cover", height: "12rem" }} // Keep h-48 behavior
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
                 <div className="absolute top-4 right-4 transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
@@ -323,20 +372,26 @@ const ProjectsSection = () => {
                 </p>
 
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tech.map((tech, techIndex) => (
-                    <span
-                      key={tech}
-                      className="px-2 py-1 bg-blue-500/20 text-blue-300 rounded text-xs border border-blue-500/30 font-mono hover:bg-blue-500/30 hover:scale-105 transition-all duration-300"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                  {project.tech.map(
+                    (
+                      tech // Removed unused techIndex
+                    ) => (
+                      <span
+                        key={tech}
+                        className="px-2 py-1 bg-blue-500/20 text-blue-300 rounded text-xs border border-blue-500/30 font-mono hover:bg-blue-500/30 hover:scale-105 transition-all duration-300"
+                      >
+                        {tech}
+                      </span>
+                    )
+                  )}
                 </div>
 
                 <div className="flex flex-wrap gap-4">
                   {project.github && (
                     <a
                       href={project.github}
+                      target="_blank" // Added for external links
+                      rel="noopener noreferrer" // Added for security
                       className="flex items-center space-x-2 text-gray-400 hover:text-white hover:scale-105 transition-all duration-300"
                     >
                       <Code size={16} />
@@ -346,6 +401,8 @@ const ProjectsSection = () => {
                   {project.live && (
                     <a
                       href={project.live}
+                      target="_blank" // Added for external links
+                      rel="noopener noreferrer" // Added for security
                       className="flex items-center space-x-2 text-gray-400 hover:text-blue-400 hover:scale-105 transition-all duration-300"
                     >
                       <ExternalLink size={16} />
@@ -383,7 +440,7 @@ const ProjectsSection = () => {
         <div className="text-center mt-12">
           {!showAll ? (
             <button
-              onClick={() => setShowAll(true)}
+              onClick={handleViewAll}
               className="inline-block px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-semibold hover:scale-110 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-2xl font-mono"
             >
               View All Projects
