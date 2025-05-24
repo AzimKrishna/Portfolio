@@ -1,27 +1,46 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "ES2017", // Matched new boilerplate
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": true, // Maintained from new boilerplate (can be set to false if too many errors initially)
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "preserve", // Required for Next.js
     "incremental": true,
-    "plugins": [
+    "plugins": [ // Added for Next.js specific plugin if you use one, e.g. next-superjson-plugin
       {
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    // From old tsconfig.app.json - can be useful to reduce strictness initially
+    "noUnusedLocals": false, // Changed from true if present
+    "noUnusedParameters": false, // Changed from true if present
+    "noImplicitAny": false, // Changed from true if strict was true
+    "noFallthroughCasesInSwitch": true // Maintained or added
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ], // Added .next/types
+  "exclude": [
+    "node_modules"
+  ]
 }
