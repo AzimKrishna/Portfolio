@@ -6,7 +6,6 @@ export default function Document() {
       <Head>
         {/* Meta tags from old index.html - common ones */}
         <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         {/* Page-specific title and description should be in individual pages or _app.tsx via Head */}
         {/* These are fallbacks or general site info */}
         <meta name="author" content="Azim Baji Krishna" />
