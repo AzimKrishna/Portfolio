@@ -33,7 +33,7 @@ const ProjectsSection = () => {
             scrollTrigger: {
               trigger: card,
               start: "top 85%",
-              toggleActions: "play none none reverse",
+              once: true, // ✅ Prevents re-animation
             },
             onComplete: () => {
               card.dataset.animated = "true";

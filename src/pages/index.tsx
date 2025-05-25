@@ -19,7 +19,7 @@ const HomePage = () => {
         <meta property="og:title" content="Azim Baji Krishna - Full-Stack Developer" />
         <meta property="og:description" content="Portfolio of Azim Baji Krishna, a full-stack developer." />
       </Head>
-      <div className="min-h-screen bg-background text-foreground"> {/* Use theme variables */}
+      <div className="min-h-screen bg-background text-foreground overflow-x-hidden "> {/* Use theme variables */}
         <Header />
         <main> {/* Added main tag for semantic HTML */}
           <HeroSection />
